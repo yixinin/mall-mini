@@ -1,0 +1,55 @@
+
+<wxs src="../../utils/filters.wxs" module="filters" />
+<view class="cart-page">
+  <scroll-view scroll-y class="cart-list">
+    <block wx:for="{{cartList}}" wx:key="id">
+      <view class="cart-item">
+        <image src="{{domain}}{{item.info.avatar}}" mode="aspectFill" class="item-image"></image>
+        
+        <view class="item-info">
+          <text class="item-name">{{item.info.name}}</text>
+          <view>
+            <text class="item-price">¥{{filters.toFix(item.info.final_price)}}</text>
+            <text class="item-ori-price">¥{{filters.toFix(item.info.price)}}</text>
+          </view>
+          <view class="quantity-control">
+            <button 
+              class="btn-minus" 
+              bindtap="changeQuantity" 
+              data-index="{{index}}" 
+              data-type="minus"
+              disabled="{{item.quantity < 1}}"
+            >-</button>
+            <text class="quantity">{{item.quantity}}</text>
+            <button 
+              class="btn-plus" 
+              bindtap="changeQuantity" 
+              data-index="{{index}}" 
+              data-type="plus"
+              disabled="{{item.quantity >= 5}}"
+            >+</button>
+
+            <button class="btn-delete" bindtap="removeItem" data-index="{{index}}">
+              <image style="width: 15px;" src="/images/icon/delete.png" mode="widthFix"></image>
+            </button>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view class="empty-cart" wx:if="{{cartList.length === 0}}">
+      <!-- <image src="/images/tab/cart.png" class="empty-image"></image> -->
+      <text class="empty-text">空空如也~</text>
+      <navigator open-type="switchTab" url="/pages/goods-list/goods-list" class="btn-go-shopping">去逛逛</navigator>
+    </view>
+  </scroll-view>
+  
+  <!-- 底部结算栏 -->
+  <view class="checkout-bar" wx:if="{{cartList.length > 0}}">
+    <view class="total-price">
+      合计：<text class="price">¥{{filters.toFix(totalPrice)}}</text>
+    </view>
+    <button class="btn-checkout" bindtap="handleReserve">立即预约</button>
+  </view>
+</view>

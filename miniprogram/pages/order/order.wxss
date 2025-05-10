@@ -1,0 +1,165 @@
+/* 订单页面样式 */
+.order-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+}
+
+/* 状态筛选 */
+.status-tabs {
+  display: flex;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.status-tabs .tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.status-tabs .tab.active {
+  color: #ff4444;
+  font-weight: bold;
+  border-bottom: 4rpx solid #ff4444;
+}
+
+/* 订单列表 */
+.order-list {
+  flex: 1;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+/* 订单卡片 */
+.order-card {
+  background: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 6rpx rgba(0,0,0,0.05);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0rpx;
+  margin-left: 10px;
+  border-bottom: 0rpx solid #f0f0f0;
+}
+
+.order-no {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.order-status {
+  font-size: 26rpx;
+}
+
+.order-status.watting {
+  color: #ff9500;
+}
+
+.order-status.done {
+  color: #07c160;
+}
+
+.order-status.canceled {
+  color: #999;
+}
+
+/* 商品列表 */
+.goods-list {
+  padding: 20rpx;
+}
+
+.goods-item {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.goods-item:last-child {
+  margin-bottom: 0;
+}
+
+.goods-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+
+.goods-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.goods-name {
+  font-size: 28rpx;
+  color: #333;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.goods-price {
+  font-size: 26rpx;
+  color: #ff4444;
+}
+
+/* 订单底部 */
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+  font-size: 26rpx;
+}
+
+.total-price {
+  color: #333;
+  font-weight: bold;
+}
+
+.order-time {
+  color: #999;
+}
+
+/* 加载状态 */
+.loading-more, .no-more, .empty {
+  text-align: center;
+  padding: 30rpx;
+  font-size: 26rpx;
+  color: #999;
+}
+
+.empty image {
+  width: 300rpx;
+  height: 300rpx;
+  opacity: 0.6;
+  margin-bottom: 20rpx;
+}
+
+.reverse-info{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  color: #999;
+  margin-left: 10px;
+}
+.goods-text{
+  padding: 0px;
+  margin: 0px;
+  font-size: 12px;
+  color: #999; 
+}

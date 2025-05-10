@@ -1,0 +1,168 @@
+/* pages/goods-list/goods-list.wxss */
+page {
+  background-color: #f5f5f5;
+  height: 100%;
+}
+
+.goods-scroll {
+  height: 100vh;
+}
+
+.sort-bar {
+  display: flex;
+  background-color: #fff;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  justify-content: space-around; /* 使按钮均匀分布 */
+}
+
+.sort-item {
+  flex: none; /* 取消flex:1的等分 */
+  padding: 8px 16px; /* 增加内边距 */
+  font-size: 15px;
+  color: #666;
+  border-radius: 16px; /* 圆角效果 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sort-item.active {
+  color: #ff4444;
+  font-weight: bold;
+  background-color: #ffeeee; /* 激活状态背景色 */
+}
+
+/* 价格排序箭头样式 */
+.sort-item text {
+  margin-left: 4px;
+  font-size: 14px;
+  top: -2px;
+}
+
+.arrow {
+  margin-left: 4px;
+  font-size: 12px;
+  line-height: 1;
+}
+
+.goods-container {
+  padding: 8px 10px;
+  background-color: #f5f5f5;
+}
+
+.goods-item {
+  display: flex;
+  padding: 12px;
+  background-color: #fff;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* 重点修改的图片样式 */
+.goods-image {
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  min-height: 100px;
+  border-radius: 4px;
+  margin-right: 12px;
+  object-fit: cover;
+}
+
+.goods-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.goods-name {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 6px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.tag {
+  font-size: 10px;
+  color: #6e6666;
+  padding: 2px 6px;
+  background-color: #ffeeee;
+  border-radius: 4px;
+  margin-right: 6px;
+  margin-bottom: 4px;
+  font-size: 9px;
+}
+
+.sales {
+  font-size: 10px;
+  color: #999;
+  margin-bottom: 6px;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;
+}
+
+.final-price {
+  font-size: 18px;
+  color: #ff4444;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.original-price {
+  font-size: 12px;
+  color: #999;
+  text-decoration: line-through;
+  margin-right: 8px;
+}
+
+.discount {
+  font-size: 12px;
+  color: #ff8800;
+  background-color: #fff8e6;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.loading {
+  text-align: center;
+  padding: 15px;
+  color: #999;
+  font-size: 14px;
+}
+
+.pre-order-btn{
+  margin: 0;
+  padding: 0 8px;
+  height: 28px;
+  line-height: 22px;
+  font-size: 15px;
+  background: linear-gradient(90deg, #ff4444, #ff6b6b);
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(255, 68, 68, 0.2);
+  transition: all 0.2s;
+}
+
+.pre-order-btn:active {
+  transform: scale(0.95);
+  opacity: 0.9;
+}

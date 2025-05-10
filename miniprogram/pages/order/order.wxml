@@ -1,0 +1,50 @@
+<view class="order-page">
+  <!-- 状态筛选 -->
+  <view class="status-tabs">
+    <block wx:for="{{statusOptions}}" wx:key="value">
+      <view 
+        class="tab {{status === item.value ? 'active' : ''}}"
+        data-status="{{item.value}}"
+        bindtap="changeStatus"
+      >
+        {{item.label}}
+      </view>
+    </block>
+  </view>
+
+  <!-- 订单列表 -->
+  <scroll-view 
+    scroll-y 
+    class="order-list" 
+    bindscrolltolower="onReachBottom"
+    enable-back-to-top
+  >
+    <block wx:for="{{orders}}" wx:key="id">
+      <view class="order-card" data-id="{{item.id}}">
+        <!-- 订单头部 -->
+        <view class="order-header">
+          <text class="order-no">预约编号: {{item.id}}</text>
+          <!-- <block class="goods-info" wx:for="{{item.goods}}">
+            <text class="goods-text">{{item.name}}</text>
+          </block>  -->
+          <text class="order-status {{item.status}}">
+            {{item.status === 'watting' ? '待上门' : 
+              item.status === 'done' ? '已完成' : '已取消'}}
+          </text>
+        </view>
+
+        <view class="reverse-info">
+            <text>预约时间：{{item.reverse.time}}</text>
+            <text>上门地址：{{item.reverse.address}}</text>
+            <text>联系电话：{{item.reverse.phone}}</text>
+          </view>
+     
+        <!-- 订单底部 -->
+        <view class="order-footer">
+          <text class="total-price">共{{item.goods.length}}件 合计: {{item.total_price}}</text>
+          <text class="order-time">{{item.create_time}}</text>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>

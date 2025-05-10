@@ -1,0 +1,16 @@
+<view class="user-container">
+  <view class="user-header">
+    <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}"></image>
+    <text class="nickname">{{userInfo.nickName || '未登录'}}</text>
+  </view>
+  
+  <view class="menu-list">
+    <navigator url="/pages/order/order" class="menu-item">
+      <text>我的预约</text>
+    </navigator>
+    <!-- <button class="menu-item" open-type="contact">
+      <text>意见反馈</text>
+      <image src="/images/arrow-right.png"></image>
+    </button> -->
+  </view>
+</view>

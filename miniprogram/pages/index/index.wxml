@@ -1,0 +1,7 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <view style="visibility: {{isManager}};">
+    <button bindtap="goGoods">预览</button>
+    <button bindtap="goOrders">工作台</button>
+  </view>
+</view>

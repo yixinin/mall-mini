@@ -1,0 +1,147 @@
+.container {
+  padding: 20rpx;
+}
+
+.product-info {
+  display: flex;
+  padding: 20rpx;
+  background: #fff;
+  border-radius: 12rpx;
+  margin-bottom: 30rpx;
+}
+
+.product-info image {
+  width: 160rpx;
+  height: 160rpx;
+  margin-right: 20rpx;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+
+.price {
+  color: #f40;
+  font-weight: bold;
+}
+
+.form-item {
+  background: #fff;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  width: 200rpx;
+  font-size: 28rpx;
+}
+
+input, .picker {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.submit-btn {
+  margin-top: 40rpx;
+  background: #07c160;
+  color: #fff;
+}
+
+.submit-btn[disabled] {
+  background: #ddd;
+}
+
+/* 添加数量控制组件样式 */
+.quantity-control {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-btn {
+  margin: 0px;
+  padding: 0px;
+  /* height: 25px; */
+  width: 25px; 
+  font-size: 13px;   
+  transition: all 0.2s;
+  border-radius: 50%;
+  background: #f5f5f5;
+  color: #333;
+}
+
+.quantity-btn::after {
+  border: none;
+}
+
+.quantity-btn[disabled] {
+  opacity: 0.5;
+}
+
+.quantity-value {
+  width: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.time-slots {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10rpx;
+}
+
+.slot-btn {
+  margin: 0;
+  padding: 0rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 26rpx;
+  background: #f5f5f5;
+  border-radius: 8rpx;
+  flex: 1;
+  margin-right: 15rpx;
+  text-align: center;
+}
+
+.slot-btn:last-child {
+  margin-right: 0;
+}
+
+.slot-btn.active {
+  background: #ff4444;
+  color: white;
+}
+
+ /* 备注文本区域样式 */
+.remark-textarea {
+  width: 100%;
+  min-height: 200rpx;
+  padding: 20rpx;
+  background: #f9f9f9;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  line-height: 1.6;
+  margin-top: 10rpx;
+  box-sizing: border-box;
+  border: 1rpx solid #eee;
+}
+
+/* 字数统计样式 */
+.remark-textarea::after {
+  color: #999;
+  font-size: 24rpx;
+}
+
+/* 聚焦状态 */
+.remark-textarea:focus {
+  border-color: #07c160;
+  background: #fff;
+}

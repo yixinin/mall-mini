@@ -1,0 +1,83 @@
+<wxs src="../../../utils/filters.wxs" module="filters" />
+
+<view class="container">
+  <form bindsubmit="submitForm">
+    <view class="form-item">
+      <text class="label">预约日期</text>
+      <picker 
+        mode="date" 
+        name="reserveDate"
+        start="{{minDate}}"
+        bindchange="dateChange"
+      >
+        <view class="picker">{{reserveDate || '请选择日期'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">期望上门时间</text>
+      <picker 
+        mode="time" 
+        start="08:00" 
+        end="18:00" 
+        bindchange="timeChange"
+        value="{{reserveTime}}"
+      >
+        <view class="picker">{{reserveTime || '请选择时间'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">联系电话</text>
+      <input 
+        type="number" 
+        name="phone" 
+        placeholder="请输入手机号" 
+        maxlength="11"
+        value="{{savedPhone}}"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">预约地址</text>
+      <picker 
+        mode="region" 
+        name="region"
+        value="{{selectedRegion}}"
+        bindchange="regionChange"
+      >
+        <view class="picker">{{selectedRegion || '请选择区域'}}</view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">详细地址</text>
+      <input 
+        type="string" 
+        name="address" 
+        placeholder="请输入详细地址" 
+        maxlength="50"
+        value="{{address}}"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="label">备注信息</text>
+      <textarea 
+        name="comment" 
+        placeholder="请输入备注信息" 
+        maxlength="500" 
+        auto-height 
+        show-count 
+        class="remark-textarea"
+      >{{comment}}</textarea>
+    </view>
+
+    <button 
+      formType="submit" 
+      class="submit-btn" 
+    >
+      立即预约
+    </button>
+  </form>
+</view>

@@ -1,0 +1,76 @@
+<!--pages/goods-list/goods-list.wxml-->
+<!-- 直接使用 scroll-view 作为根容器，去掉多余的 container -->
+<wxs src="../../utils/filters.wxs" module="filters" />
+<scroll-view 
+  scroll-y 
+  class="goods-scroll" 
+  enable-back-to-top
+>
+  <!-- 排序栏 -->
+  <view class="sort-bar">
+    <view 
+      class="sort-item {{sortType === 'default' ? 'active' : ''}}" 
+      data-type="default"
+      bindtap="handleSortChange"
+    >
+      默认
+    </view>
+    <!-- <view 
+      class="sort-item {{sortType === 'sales' ? 'active' : ''}}" 
+      data-type="sales"
+      bindtap="handleSortChange"
+    >
+      销量
+    </view> -->
+    <view 
+      class="sort-item {{sortType === 'price' ? 'active' : ''}}" 
+      data-type="price"
+      bindtap="handleSortChange"
+    >
+     <text>价值</text> 
+      <text class="arrow">{{sortType === 'price' ? (priceOrder === 'asc' ? '↑' : '↓') : ''}}</text>
+    </view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view class="goods-container">
+    <block wx:for="{{goodsList}}" wx:key="id">
+      <view class="goods-item" data-id="{{item.id}}" bindtap="goToDetail">
+        <image class="goods-image" src="{{domain}}{{item.avatar}}" mode="scaleToFill" />
+        <view class="goods-info">
+          <view class="goods-name">{{item.name}}</view>
+          <view class="tags">
+            <block wx:for="{{item.tags}}" wx:key="*this">
+              <text class="tag">{{item}}</text>
+            </block>
+            <!-- <view class="sales">已售: {{item.sales}}</view> -->
+          </view>
+          
+          <view class="price-container">
+            <view>
+              <view>
+                <text class="final-price">{{item.final_price}}</text>
+                <text class="original-price">{{item.price}}</text>
+              </view>
+              <!-- <text class="discount">{{filters.toFix(item.discount)}}折热销中</text> -->
+            </view>
+           <!-- <button style="width: 22vw;" class="pre-order-btn" data-id="{{item.id}}" bindtap="handleReserve">立即预约</button> -->
+           <button 
+            style="width: 30vw;" 
+            class="pre-order-btn"
+            bindtap="addToCart" 
+            data-id="{{item.id}}"
+          >
+            添加
+          </button>
+          </view>
+        </view>
+        
+      </view>
+    </block>
+  </view>
+
+  <view wx:if="{{isLoading}}" class="loading">
+    <text>加载中...</text>
+  </view>
+</scroll-view>

@@ -1,0 +1,42 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/goods-list/goods-list",
+    "pages/user/user",
+    "pages/cart/cart",
+    "pages/order/order",
+    "pages/cart/reverse/reverse",
+    "pages/manager/order/order"
+  ],
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/goods-list/goods-list",
+        "text": "服务",
+        "iconPath": "images/tab/service.png",
+        "selectedIconPath": "images/tab/service-active.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "预约",
+        "iconPath": "images/tab/cart.png",
+        "selectedIconPath": "images/tab/cart-active.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "我的预约",
+        "iconPath": "images/tab/order.png",
+        "selectedIconPath": "images/tab/order-active.png"
+      }
+    ]
+  },
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "Weixin",
+    "navigationBarBackgroundColor": "#ffffff"
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "lazyCodeLoading": "requiredComponents"
+}

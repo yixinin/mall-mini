@@ -1,0 +1,176 @@
+/* pages/cart/cart.wxss */
+.cart-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7f7f7;
+}
+
+.cart-list {
+  flex: 1;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+.cart-item {
+  display: flex;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+  box-shadow: 0 2rpx 6rpx rgba(0,0,0,0.05);
+}
+
+.item-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-name {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.item-price {
+  font-size: 32rpx;
+  color: #ff4444;
+  font-weight: bold;
+  margin: 10rpx 0;
+}
+
+.item-ori-price{
+  font-size: 12px;
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 5px;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-control button {
+  margin: 0;
+  width: 50rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding: 0;
+  min-width: auto;
+  font-size: 32rpx;
+  background: #f5f5f5;
+  border-radius: 50%;
+}
+
+.quantity-control button::after {
+  border: none;
+}
+
+.quantity-control button[disabled] {
+  opacity: 0.5;
+}
+
+.quantity {
+  width: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+}
+
+.btn-delete {
+  position: relative;
+  left: 20px;
+  top: 2px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.btn-delete::after {
+  border: none;
+}
+
+.btn-delete image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 空状态样式 */
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100rpx;
+}
+
+.empty-image {
+  width: 300rpx;
+  height: 300rpx;
+  opacity: 0.6;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin: 30rpx 0;
+}
+
+.btn-go-shopping {
+  background: #ff4444;
+  color: #fff;
+  padding: 15rpx 60rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+}
+
+/* 底部结算栏 */
+.checkout-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100rpx;
+  padding: 0 30rpx;
+  background: #fff;
+  border-top: 1rpx solid #eee;
+}
+
+.total-price {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.price {
+  color: #ff4444;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.btn-checkout {
+  margin: 0;
+  background: #ff4444;
+  color: #fff;
+  border-radius: 40rpx;
+  padding: 0 50rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+}
+
+.btn-checkout::after {
+  border: none;
+}
