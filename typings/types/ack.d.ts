@@ -3,3 +3,7 @@ type Ack<T> = {
   msg: string,
   data: T,
 }
+type Image = {
+  id: number,
+  path: string,
+}

@@ -174,3 +174,199 @@
 .btn-checkout::after {
   border: none;
 }
+
+/* 功能卡片样式 */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.function-card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.03);
+  transition: all 0.3s ease;
+}
+
+.function-card:active {
+  transform: scale(0.98);
+  background-color: #f9f9f9;
+}
+
+.card-left {
+  display: flex;
+  align-items: center;
+}
+
+.card-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 20rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.card-arrow {
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.5;
+}
+
+/* 现代化协议弹窗 */
+.agreement-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10rpx);
+}
+
+.modal-container {
+  width: 80%;
+  max-height: 80vh;
+  background-color: #fff;
+  border-radius: 24rpx;
+  overflow: hidden;
+  z-index: 1001;
+  animation: modalShow 0.3s ease;
+}
+
+@keyframes modalShow {
+  from {
+    opacity: 0;
+    transform: translateY(100rpx);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  padding: 40rpx 30rpx 20rpx;
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-content {
+  max-height: 50vh;
+  padding: 0 30rpx 30rpx;
+}
+
+.agreement-text {
+  font-size: 28rpx;
+  line-height: 1.8;
+  color: #666;
+  white-space: pre-line;
+}
+
+.modal-footer {
+  display: flex;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.modal-btn {
+  flex: 1;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 32rpx;
+  border-radius: 0;
+  margin: 0;
+  border: none;
+  background: none;
+}
+
+.modal-btn::after {
+  border: none;
+}
+
+.modal-btn.decline {
+  color: #999;
+  border-right: 1rpx solid #f0f0f0;
+}
+
+.modal-btn.accept {
+  color: #6e8efb;
+  font-weight: 500;
+}
+
+/* 协议确认卡片样式 */
+.agreement-card {
+  margin-bottom: 30rpx;
+  padding: 10px;
+  font-size: 12px;
+}
+
+.agreement-item {
+  display: flex;
+  align-items: center;
+  padding: 25rpx 0;
+  border-bottom: 1rpx dashed #eee;
+}
+
+.agreement-item:last-child {
+  border-bottom: none;
+}
+
+.agreement-radio {
+  margin-right: 20rpx;
+  transform: scale(0.7);  
+}
+
+.agreement-text {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.policy-link {
+  color: #1890ff;
+  margin-left: 5rpx;
+}
+
+.confirm-btn {
+  margin-top: 40rpx;
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  background-color: #1890ff;
+  color: white;
+  font-size: 30rpx;
+  transition: all 0.3s;
+}
+
+.confirm-btn[disabled] {
+  background-color: #d9d9d9;
+  color: #999;
+  opacity: 0.7;
+}

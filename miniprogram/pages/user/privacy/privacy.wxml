@@ -1,0 +1,57 @@
+<view class="container">
+  <view class="header">
+    <text class="title">隐私政策</text>
+  </view>
+  
+  <view class="content">
+    <view class="section">
+      <text class="section-title">感谢您使用祥世家政服务小程序</text>
+      <text class="section-text">我们深知个人信息对您的重要性，并承诺按照法律法规要求保护您的个人信息安全。本隐私协议旨在向您说明我们如何收集、使用、存储和保护您的个人信息。</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">一、信息收集</text>
+      <text class="section-text">1. 为提供家政上门服务，我们需要收集以下必要信息：\n   - 手机号码：用于服务预约确认、服务人员联系及服务状态通知\n   - 服务地址：用于家政服务人员上门服务定位</text>
+      <text class="section-text">2. 我们可能会在以下情况下收集您的信息：\n   - 当您创建账户或预约服务时\n    - 当您联系我们的客服时</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">二、信息使用</text>
+      <text class="section-text">我们收集的个人信息将仅用于以下目的：\n1. 为您提供预约的家政上门服务\n2. 服务人员与您联系确认服务细节\n3. 服务人员定位并前往服务地址\n4. 改善我们的服务质量\n5. 遵守法律法规要求</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">三、信息存储与保护</text>
+      <text class="section-text">1. 我们将采取合理的安全措施保护您的个人信息，防止未经授权的访问、披露、使用、修改或销毁。\n2. 您的信息将存储在中国境内的服务器上。\n3. 我们仅会在实现本政策所述目的所需的期限内保留您的个人信息。</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">四、信息共享与披露</text>
+      <text class="section-text">我们承诺不会将您的个人信息出售给第三方。仅在以下情况下，我们可能会共享您的信息：\n1. 与提供家政服务的合作方共享必要信息（仅限服务所需）\n2. 根据法律法规要求或政府主管部门的强制性要求\n3. 为保护我们或他人的合法权益、财产或安全</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">五、您的权利</text>
+      <text class="section-text">您有权：\n1. 访问、更正或删除您的个人信息\n2. 更改或撤回您的授权同意\n3. 注销您的账户\n4. 投诉或举报个人信息处理问题</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">六、未成年人保护</text>
+      <text class="section-text">我们不会主动收集未成年人的个人信息。如您为未成年人，请在监护人指导下使用我们的服务。</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">七、协议变更</text>
+      <text class="section-text">我们可能会适时更新本隐私协议。更新后的协议将在小程序内公布，请您定期查阅。</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">八、联系我们</text>
+      <text class="section-text">如您对本隐私协议或个人信息保护有任何疑问，请联系我们：\n客服电话：400-123-4567\n电子邮箱：service@example.com</text>
+    </view>
+    
+    <view class="footer">
+      <text class="update-date">最后更新日期：2025年5月11日</text>
+    </view>
+  </view>
+</view>

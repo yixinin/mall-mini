@@ -1,0 +1,70 @@
+<view class="goods-manage-page">
+  <!-- 搜索和添加按钮 -->
+  <view class="action-bar">
+    <view class="search-box">
+      <input 
+        class="search-input" 
+        placeholder="搜索服务名称" 
+        bindinput="onSearchInput"
+        value="{{searchKeyword}}"
+      />
+      <image class="search-icon" src="/images/search.png"></image>
+    </view>
+    <button class="add-btn" bindtap="navigateToAddGoods">+ 新增</button>
+  </view>
+
+  <!-- 商品列表 -->
+  <scroll-view class="goods-list" scroll-y>
+    <block wx:for="{{filteredGoods}}" wx:key="id">
+      <view 
+        class="goods-card {{item.status === 'inactive' ? 'disabled' : ''}}" 
+        bindtap="navigateToEditGoods" 
+        data-id="{{item.id}}">
+        <image class="goods-avatar" src="{{domain}}{{item.avatar}}"></image>
+        <view class="goods-info">
+          <view class="goods-header">
+            <text class="goods-name">{{item.name}}</text>
+            <text class="goods-status {{item.status}}">
+              {{item.status === 'active' ? '在售' : '已下架'}}
+            </text>
+          </view>
+          
+          <view class="goods-tags">
+            <block wx:for="{{item.tags}}" wx:key="*this">
+              <text class="tag">{{item}}</text>
+            </block>
+          </view>
+          
+          <view class="goods-price-row">
+            <text class="price-label">售价:</text>
+            <text class="original-price">¥{{item.price}}</text>
+            <text class="final-price">¥{{item.final_price}}</text>
+            <text class="sales">销量: {{item.sold}}</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view wx:if="{{filteredGoods.length === 0}}" class="empty-tip">
+      <image class="empty-icon" src="/images/empty.png"></image>
+      <text class="empty-text">暂无商品数据</text>
+    </view>
+  </scroll-view>
+
+  <!-- 删除确认弹窗 -->
+  <view class="modal" wx:if="{{showDeleteModal}}">
+    <view class="modal-mask" bindtap="hideDeleteModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">确认删除</text>
+      </view>
+      <view class="modal-body">
+        <text>确定要删除商品吗？此操作不可恢复！</text>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel" bindtap="hideDeleteModal">取消</button>
+        <button class="modal-btn confirm" bindtap="confirmDelete">确定删除</button>
+      </view>
+    </view>
+  </view>
+</view>

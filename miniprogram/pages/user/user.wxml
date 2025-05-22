@@ -1,16 +1,114 @@
-<view class="user-container">
-  <view class="user-header">
-    <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}"></image>
-    <text class="nickname">{{userInfo.nickName || '未登录'}}</text>
+<view class="page">
+  <!-- 顶部用户信息卡片 -->
+  <view class="user-card" bindtap="handleLogin">
+    <image class="user-avatar" src="{{userInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+    <view class="user-info">
+      <text class="user-name">{{userInfo.nickname || '点击登录'}}</text>
+    </view>
+    <view class="user-status {{userInfo.nickname ? 'active' : ''}}">
+      {{userInfo.nickname ? '已认证' : '未登录'}}
+    </view>
   </view>
-  
-  <view class="menu-list">
-    <navigator url="/pages/order/order" class="menu-item">
-      <text>我的预约</text>
-    </navigator>
-    <!-- <button class="menu-item" open-type="contact">
-      <text>意见反馈</text>
-      <image src="/images/arrow-right.png"></image>
-    </button> -->
+
+  <!-- 功能卡片区域 -->
+  <view class="card-container">
+    <!-- 我的订单 -->
+    <view class="function-card" bindtap="navigateToOrders">
+      <view class="card-left">
+        <image class="card-icon" src="/images/order.png"></image>
+        <text class="card-title">我的预约</text>
+      </view>
+      <image class="card-arrow" src="/images/arrow-right.png"></image>
+    </view>
+
+    <!-- 加入我们 -->
+    <!-- <view class="function-card" bindtap="navigateToJoin">
+      <view class="card-left">
+        <image class="card-icon" src="/images/join.png"></image>
+        <text class="card-title">加入我们</text>
+      </view>
+      <image class="card-arrow" src="/images/arrow-right.png"></image>
+    </view> -->
+    <view wx:if="{{manageOrder}}" class="function-card" bindtap="navigateToManageOrder">
+      <view class="card-left">
+        <image class="card-icon" src="/images/order-manage.png"></image>
+        <text class="card-title">管理预约</text>
+      </view>
+      <image class="card-arrow" src="/images/arrow-right.png"></image>
+    </view>
+    <view wx:if="{{manageGoods}}" class="function-card" bindtap="navigateToManageGoods">
+      <view class="card-left">
+        <image class="card-icon" src="/images/goods.png"></image>
+        <text class="card-title">管理服务</text>
+      </view>
+      <image class="card-arrow" src="/images/arrow-right.png"></image>
+    </view>
+
+    <view wx:if="{{manageUser}}" class="function-card" bindtap="navigateToManageUser">
+      <view class="card-left">
+        <image class="card-icon" src="/images/user.png"></image>
+        <text class="card-title">管理用户</text>
+      </view>
+      <image class="card-arrow" src="/images/arrow-right.png"></image>
+    </view>
+
+    <!-- <view wx:if="{{manageUser}}" class="function-card" bindtap="navigateToManageLessee">
+      <view class="card-left">
+        <image class="card-icon" src="/images/lessee.png"></image>
+        <text class="card-title">管理店铺</text>
+      </view>
+      <image class="card-arrow" src="/images/arrow-right.png"></image>
+    </view> -->
+
+    <!-- 联系客服 -->
+    <view class="function-card" bindtap="contactCustomerService">
+      <view class="card-left">
+        <image class="card-icon" src="/images/service.png"></image>
+        <text class="card-title">联系客服</text>
+      </view>
+      <image class="card-arrow" src="/images/arrow-right.png"></image>
+    </view>
+
+    <!-- 关于我们 -->
+    <view class="function-card" bindtap="navigateToAbout">
+      <view class="card-left">
+        <image class="card-icon" src="/images/about.png"></image>
+        <text class="card-title">关于我们</text>
+      </view>
+      <image class="card-arrow" src="/images/arrow-right.png"></image>
+    </view>
+  </view>
+
+  <!-- 现代化协议弹窗 -->
+  <view class="agreement-modal" wx:if="{{showAgreementModal}}">
+    <view class="modal-mask"></view>
+    <view class="modal-container">
+      <view class="modal-header">
+        <text class="modal-title">用户协议与隐私政策</text>
+      </view>
+      <view class="card agreement-card"> 
+        <view class="card-body">
+          <view class="agreement-item">
+            <radio class="agreement-radio" checked="{{agreements.user}}" bindtap="toggleAgreement" data-type="user" />
+            <view class="agreement-text">
+              <text>我已仔细阅读并同意</text>
+              <text class="policy-link" bindtap="navigateToUserAgreement">《用户协议》</text>
+            </view>
+          </view>
+
+          <view class="agreement-item">
+            <radio class="agreement-radio" checked="{{agreements.privacy}}" bindtap="toggleAgreement" data-type="privacy" />
+            <view class="agreement-text">
+              <text>我已仔细阅读并同意</text>
+              <text class="policy-link" bindtap="navigateToPrivacyPolicy">《隐私政策》</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn decline" bindtap="cancelAgreement">暂不使用</button>
+        <button class="modal-btn accept" bindtap="confirmAgreement">同意并继续</button>
+      </view>
+    </view>
   </view>
 </view>

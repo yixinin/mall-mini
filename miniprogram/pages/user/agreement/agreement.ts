@@ -1,4 +1,4 @@
-// pages/order/order.ts
+// pages/user/agreement/agreement.ts
 Page({
 
   /**

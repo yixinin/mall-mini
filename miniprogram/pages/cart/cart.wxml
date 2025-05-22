@@ -52,4 +52,37 @@
     </view>
     <button class="btn-checkout" bindtap="handleReserve">立即预约</button>
   </view>
+  <!-- 用户协议弹窗 -->
+   <!-- 现代化协议弹窗 -->
+   <view class="agreement-modal" wx:if="{{showAgreementModal}}">
+    <view class="modal-mask"></view>
+    <view class="modal-container">
+      <view class="modal-header">
+        <text class="modal-title">用户协议与隐私政策</text>
+      </view>
+      <view class="card agreement-card"> 
+        <view class="card-body">
+          <view class="agreement-item">
+            <radio class="agreement-radio" checked="{{agreements.user}}" bindtap="toggleAgreement" data-type="user" />
+            <view class="agreement-text">
+              <text>我已仔细阅读并同意</text>
+              <text class="policy-link" bindtap="navigateToUserAgreement">《用户协议》</text>
+            </view>
+          </view>
+
+          <view class="agreement-item">
+            <radio class="agreement-radio" checked="{{agreements.privacy}}" bindtap="toggleAgreement" data-type="privacy" />
+            <view class="agreement-text">
+              <text>我已仔细阅读并同意</text>
+              <text class="policy-link" bindtap="navigateToPrivacyPolicy">《隐私政策》</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn decline" bindtap="cancelAgreement">暂不使用</button>
+        <button class="modal-btn accept" bindtap="confirmAgreement">同意并继续</button>
+      </view>
+    </view>
+  </view>
 </view>

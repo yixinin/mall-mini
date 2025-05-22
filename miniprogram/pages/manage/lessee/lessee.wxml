@@ -1,0 +1,130 @@
+<view class="container">
+  <!-- 店铺信息卡片 -->
+  <view class="shop-card">
+    <image wx:if="{{shopInfo.logo}}" src="{{shopInfo.logo}}" class="shop-logo" />
+    <view class="shop-info">
+      <view class="shop-header">
+        <text class="shop-name">{{shopInfo.name}}</text>
+        <text class="shop-status {{shopInfo.status}}">
+          {{shopInfo.status === 'active' ? '营业中' : shopInfo.status === 'inactive' ? '已停用' : '待审核'}}
+        </text>
+      </view>
+      <view wx:if="{{shopInfo.address}}" class="shop-address">
+        <text class="icon">📍</text>
+        <text>{{shopInfo.address}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Tab栏 -->
+  <view class="tabs">
+    <view 
+      wx:for="{{tabs}}" 
+      wx:key="key" 
+      class="tab {{activeTab === item.key ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="{{item.key}}"
+    >
+      <text>{{item.title}}</text>
+    </view>
+  </view>
+
+  <!-- 内容区域 -->
+  <scroll-view 
+    scroll-y 
+    class="content" 
+    refresher-enabled 
+    refresher-triggered="{{refreshing}}" 
+    bindrefresherrefresh="refreshData"
+  >
+    <!-- 店员列表 -->
+    <view wx:if="{{activeTab === 'tech'}}" class="tab-content">
+      <view wx:if="{{techList.length === 0}}" class="empty-state">
+        <text>暂无店员</text>
+      </view>
+      
+      <view wx:for="{{techList}}" wx:key="userId" class="member-card">
+        <image class="member-avatar" src="{{item.userInfo.avatar || '/images/default-avatar.png'}}" />
+        <view class="member-info">
+          <text class="member-name">{{item.userInfo.name}}</text>
+          <view class="member-meta">
+            <text class="member-phone">{{item.userInfo.phone || '未填写手机号'}}</text>
+            <text class="member-join-date">加入于 {{item.joinDate}}</text>
+          </view>
+        </view>
+        <button 
+          wx:if="{{currentUser.role === 'system_admin' || currentUser.role === 'shop_admin'}}" 
+          bindtap="removeMember" 
+          data-user-id="{{item.userId}}"
+          data-role="{{item.role}}"
+          class="remove-btn"
+        >
+          移除
+        </button>
+      </view>
+    </view>
+    
+    <!-- 管理员列表 -->
+    <view wx:if="{{activeTab === 'admins'}}" class="tab-content">
+      <view wx:if="{{adminList.length === 0}}" class="empty-state">
+        <text>暂无管理员</text>
+      </view>
+      
+      <view wx:for="{{adminList}}" wx:key="userId" class="member-card admin">
+        <image class="member-avatar" src="{{item.userInfo.avatar || '/images/default-avatar.png'}}" />
+        <view class="member-info">
+          <text class="member-name">{{item.userInfo.name}}</text>
+          <view class="member-meta">
+            <text class="member-email">{{item.userInfo.email || '未填写邮箱'}}</text>
+            <text class="member-join-date">加入于 {{item.joinDate}}</text>
+          </view>
+        </view>
+        <button 
+          wx:if="{{currentUser.role === 'system_admin'}}" 
+          bindtap="removeMember" 
+          data-user-id="{{item.userId}}"
+          data-role="{{item.role}}"
+          class="remove-btn"
+        >
+          移除
+        </button>
+      </view>
+    </view>
+    
+    <!-- 申请列表 -->
+    <view wx:if="{{activeTab === 'applications'}}" class="tab-content">
+      <view wx:if="{{filteredApplications.length === 0}}" class="empty-state">
+        <text>暂无待处理申请</text>
+      </view>
+      
+      <view wx:for="{{filteredApplications}}" wx:key="id" class="application-card">
+        <image class="applicant-avatar" src="{{item.userInfo.avatar || '/images/default-avatar.png'}}" />
+        <view class="application-info">
+          <text class="applicant-name">{{item.userInfo.name}}</text>
+          <view class="application-meta">
+            <text class="application-role">申请成为{{item.desiredRole === 'shop_admin' ? '管理员' : '店员'}}</text>
+            <text class="application-date">{{item.appliedAt}}</text>
+          </view>
+        </view>
+        <view class="application-actions">
+          <button 
+            bindtap="handleApplication" 
+            data-action="approve" 
+            data-application-id="{{item.id}}"
+            class="approve-btn"
+          >
+            通过
+          </button>
+          <button 
+            bindtap="handleApplication" 
+            data-action="reject" 
+            data-application-id="{{item.id}}"
+            class="reject-btn"
+          >
+            拒绝
+          </button>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

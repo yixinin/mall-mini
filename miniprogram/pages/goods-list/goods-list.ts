@@ -10,24 +10,28 @@ Page({
     lessee: 0
   },
 
-  onLoad() {
-    this.loadGoodsList();
+  onLoad( ) {  
+    wx.getStorage({
+      key: 'lessee',
+      success: (res) => {
+        console.log('lessee:', res.data);
+        this.loadGoodsList(res.data);
+      },
+      fail: (res) => {
+        console.log('load lessee fail:', res);
+      }
+    })
   },
 
-  // 模拟加载商品数据
-  loadGoodsList() {
-    this.setData({ isLoading: true });
+  loadGoodsList(lessee: number) {
+    this.setData({ isLoading: true, lessee: lessee });
     const token = wx.getStorageSync('token') || '';
-    const lessee = wx.getStorageSync('lessee') || 0;
-
     if (lessee == 0) {
-      wx.navigateTo({
-        url: "/pages/index/index"
-      });
+      wx.showToast({ title: '加载租户失败, 请稍后再试。', icon: 'none' });
       return
-    } 
+    }
     wx.request({
-      url: 'https://mini.iakl.top/api/v1/mini/goods',
+      url: 'https://mini.iakl.top/api/v1/mini/goods?status=active',
       method: 'GET',
       data: {},
       header: {
@@ -35,6 +39,12 @@ Page({
         "lessee": lessee,
       },
       success: (res) => {
+        if (res.statusCode != 200) {
+          console.error('获取商品列表失败');
+          wx.showToast({ title: '加载失败, 请稍后再试。', icon: 'none' });
+          this.setData({ loading: false });
+          return
+        }
         console.log("get goods:", res.data);
         const ack = res.data as Ack<GoodsItem[]>;
         const goodsList = ack.data;
@@ -48,7 +58,7 @@ Page({
       },
       fail: (err) => {
         console.error('获取商品列表失败', err);
-        wx.showToast({ title: '加载失败', icon: 'none' });
+        wx.showToast({ title: '加载失败, 请稍后再试。', icon: 'none' });
         this.setData({ loading: false });
       }
     });
@@ -61,7 +71,7 @@ Page({
 
     switch (type) {
       case 'sales':
-        sortedList.sort((a, b) => b.sales - a.sales);
+        sortedList.sort((a, b) => b.sold - a.sold);
         break;
       case 'price':
         sortedList.sort((a, b) =>
@@ -114,10 +124,10 @@ Page({
     });
   },
 
-  getCartKey(){
+  getCartKey() {
     const lessee = wx.getStorageSync('lessee');
     const key = lessee.toString() + '/cart';
-    console.log("cart key ",key);
+    console.log("cart key ", key);
     return key
   },
   // 添加购物车方法
@@ -130,29 +140,46 @@ Page({
     }
     // 获取当前购物车
     let cart: CartGoodsItem[] = wx.getStorageSync(this.getCartKey()) || [];
-
+    console.log(cart);
+    console.log('goods id', id);
     // 检查是否已存在
     const existIndex = cart.findIndex(item => item.info.id === id);
+    var added = false;
     if (existIndex >= 0) {
-      cart[existIndex].quantity += 1;
+      if (cart[existIndex].quantity < 5) {
+        cart[existIndex].quantity += 1;
+        added = true
+      } else {
+        // 显示反馈
+        wx.showToast({
+          title: '最多添加5个',
+          icon: 'error'
+        });
+      }
     } else {
       cart.push({
         info: product,
         quantity: 1
       });
+      added = true;
     }
 
-    // 保存到本地
-    wx.setStorageSync(this.getCartKey(), cart);
+    if (added) {
+      // 显示反馈
+      wx.showToast({
+        title: '添加成功',
+        icon: 'success'
+      });
+      // 保存到本地
+      wx.setStorageSync(this.getCartKey(), cart);
+      // 更新购物车角标
+      this.updateTabBarBadge();
+    }
 
-    // 显示反馈
-    wx.showToast({
-      title: '添加成功',
-      icon: 'success'
-    });
 
-    // 更新购物车角标
-    this.updateTabBarBadge();
+
+
+
   },
 
   // 更新购物车角标

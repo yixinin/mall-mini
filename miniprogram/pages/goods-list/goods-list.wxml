@@ -27,7 +27,7 @@
       data-type="price"
       bindtap="handleSortChange"
     >
-     <text>价值</text> 
+     <text>售价</text> 
       <text class="arrow">{{sortType === 'price' ? (priceOrder === 'asc' ? '↑' : '↓') : ''}}</text>
     </view>
   </view>
@@ -49,8 +49,8 @@
           <view class="price-container">
             <view>
               <view>
-                <text class="final-price">{{item.final_price}}</text>
-                <text class="original-price">{{item.price}}</text>
+                <text class="final-price">￥{{item.final_price}}</text>
+                <text class="original-price">￥{{item.price}}</text>
               </view>
               <!-- <text class="discount">{{filters.toFix(item.discount)}}折热销中</text> -->
             </view>

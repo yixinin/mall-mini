@@ -1,0 +1,145 @@
+/* 页面基础样式 */
+.about-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding-bottom: 40rpx;
+}
+
+/* 横幅样式 */
+.banner {
+  height: 300rpx;
+  position: relative;
+  margin-bottom: 40rpx;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+}
+
+.banner-title {
+  position: absolute;
+  bottom: 60rpx;
+  left: 40rpx;
+  color: white;
+  font-size: 48rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+/* 卡片通用样式 */
+.card {
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin: 0 30rpx 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.04);
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.card-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+}
+
+.card-title {
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.card-body {
+  padding: 30rpx;
+}
+
+.card-text {
+  font-size: 28rpx;
+  line-height: 1.8;
+  color: #666;
+}
+
+/* 版本信息样式 */
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25rpx;
+}
+
+.info-label {
+  font-size: 28rpx;
+  color: #888;
+}
+
+.info-value {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.check-update-btn {
+  margin-top: 40rpx;
+  background-color: #f0f7ff;
+  color: #1890ff;
+  border: none;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  border-radius: 40rpx;
+}
+
+.check-update-btn::after {
+  border: none;
+}
+
+/* 联系方式样式 */
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 25rpx 0;
+  border-bottom: 1rpx dashed #eee;
+}
+
+.contact-item:last-child {
+  border-bottom: none;
+}
+
+.contact-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 20rpx;
+}
+
+.contact-text {
+  font-size: 28rpx;
+  color: #333;
+  flex: 1;
+}
+
+/* 页脚样式 */
+.footer {
+  margin-top: 60rpx;
+  text-align: center;
+}
+
+.footer-text {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+  line-height: 1.6;
+}

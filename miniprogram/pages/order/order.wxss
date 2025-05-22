@@ -63,14 +63,18 @@
 }
 
 .order-status.watting {
-  color: #ff9500;
+  color: plum;
 }
 
 .order-status.done {
   color: #07c160;
 }
 
-.order-status.canceled {
+.order-status.confirmed {
+  color: orange;
+}
+
+.order-status.cancelled {
   color: #999;
 }
 

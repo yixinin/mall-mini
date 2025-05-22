@@ -13,20 +13,6 @@
         <view class="picker">{{reserveDate || '请选择日期'}}</view>
       </picker>
     </view>
-
-    <view class="form-item">
-      <text class="label">期望上门时间</text>
-      <picker 
-        mode="time" 
-        start="08:00" 
-        end="18:00" 
-        bindchange="timeChange"
-        value="{{reserveTime}}"
-      >
-        <view class="picker">{{reserveTime || '请选择时间'}}</view>
-      </picker>
-    </view>
-
     <view class="form-item">
       <text class="label">联系电话</text>
       <input 
@@ -64,13 +50,13 @@
     <view class="form-item">
       <text class="label">备注信息</text>
       <textarea 
-        name="comment" 
+        name="remark" 
         placeholder="请输入备注信息" 
         maxlength="500" 
         auto-height 
         show-count 
         class="remark-textarea"
-      >{{comment}}</textarea>
+      >{{remark}}</textarea>
     </view>
 
     <button 

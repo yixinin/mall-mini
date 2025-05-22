@@ -1,0 +1,15 @@
+<view class="about-page">
+  <!-- 联系方式卡片 -->
+  <view class="card">
+    <view class="card-header">
+      <image class="card-icon"  ></image>
+      <text class="card-title">联系我们</text>
+    </view>
+    <view class="card-body"> 
+      <view class="contact-item" bindtap="openEmail">
+        <image class="contact-icon"  ></image>
+        <text class="contact-text">商务合作: yixinin@outlook.com</text>
+      </view> 
+    </view>
+  </view>
+</view>

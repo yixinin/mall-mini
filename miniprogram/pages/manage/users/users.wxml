@@ -1,0 +1,20 @@
+<view class="container"> 
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <!-- 管理员列表 -->
+  <view > 
+    <view wx:for="{{users}}" wx:key="id" class="user-item">
+        <image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+        <view class="user-info">
+          <view class="nickname">{{item.nickname}}</view>
+          <view class="nickname">{{item.kind}}</view>
+        </view> 
+        <view wx:if="{{item.kind==='customer' || item.kind==='customer' == 'tech'}}">
+          <button bindtap="updateUserKind" data-id="{{item.id}}">设为店长</button>
+        </view>
+        
+      </view>
+  </view> 
+</view>

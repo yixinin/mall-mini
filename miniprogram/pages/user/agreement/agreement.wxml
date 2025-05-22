@@ -1,0 +1,61 @@
+<view class="container">
+  <view class="header">
+    <text class="title">用户服务协议</text>
+  </view>
+  
+  <view class="content">
+    <view class="section">
+      <text class="section-title">欢迎使用祥世家政小程序</text>
+      <text class="section-text">在注册成为用户或使用本服务前，请仔细阅读本《用户服务协议》（以下简称"本协议"）。当您点击"同意"按钮或实际使用本服务时，即表示您已充分阅读、理解并接受本协议的全部内容。</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">一、服务内容</text>
+      <text class="section-text">1. 本小程序提供家政服务预约、管理及相关服务\n2. 服务内容包括但不限于：保洁服务、家电清洗、家电维修等\n3. 具体服务内容、价格以小程序内展示为准</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">二、用户注册与账户</text>
+      <text class="section-text">1. 您需提供真实、准确、完整的注册信息\n2. 您应妥善保管账户信息及密码，所有账户操作视为您本人行为\n3. 如发现他人未经授权使用您的账户，应立即通知我们</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">三、服务预约规则</text>
+      <text class="section-text">1. 您可通过小程序预约家政服务，需提供准确的服务时间、地址等信息\n2. 预约成功后如需变更或取消，请至少提前24小时操作\n3. 无故爽约可能影响您的信用及后续服务使用</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">四、费用与支付</text>
+      <text class="section-text">1. 服务费用以小程序展示价格为准\n2. </text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">五、用户义务</text>
+      <text class="section-text">1. 不得利用本服务从事任何违法活动\n2. 应如实告知服务人员家庭环境及特殊要求\n3. 应尊重服务人员，不得有侮辱、歧视等行为\n4. 应保证服务环境安全，妥善保管贵重物品</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">六、服务人员管理</text>
+      <text class="section-text">1. 我们会对服务人员进行资质审核和培训\n2. 如对服务不满意，可在服务完成后24小时内反馈\n3.</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">七、责任限制</text>
+      <text class="section-text">1. 因不可抗力导致服务无法履行的，双方互不承担责任\n2. 因用户提供信息不准确导致的损失，由用户自行承担\n3. 服务人员造成的财产损失，经核实后按实际价值赔偿</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">八、协议修改</text>
+      <text class="section-text">1. 我们有权根据业务需要修改本协议\n2. 修改后的协议将在小程序内公示\n3. 如您不同意修改内容，可停止使用本服务</text>
+    </view>
+    
+    <view class="section">
+      <text class="section-title">九、法律适用</text>
+      <text class="section-text">1. 本协议的解释与适用均适用中华人民共和国法律\n2. 如发生争议，双方应友好协商；协商不成的，可向被告所在地法院提起诉讼</text>
+    </view>
+    
+    <view class="footer">
+      <text class="update-date">最后更新日期：2025年5月11日</text>
+    </view>
+  </view>
+</view>
