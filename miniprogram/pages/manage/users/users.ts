@@ -1,17 +1,5 @@
-import {getUsersURL} from '../../../utils/urls';
-import {updateUserKind} from '../../../remote/user';
-// 封装 wx.request 为 Promise
-const request = <T>(options: WechatMiniprogram.RequestOption): Promise<T> => {
-  return new Promise((resolve, reject) => {
-    wx.request({
-      ...options,
-      success: (res) => { 
-        resolve(res.data as T)
-      },
-      fail: reject,
-    });
-  });
-};
+
+import { getUserList, updateUserKind } from '../../../service/user';
 
 Page({
   data: {
@@ -27,18 +15,9 @@ Page({
   async fetchUserList() {
     this.setData({ loading: true }); 
     try {
-      const data = await request<Ack<UserInfo[]>>({
-        url: getUsersURL(),
-        method: 'GET',
-        header: {
-          'Authorization': wx.getStorageSync('token'),
-          'lessee': wx.getStorageSync("lessee"),
-        }
-      });
-      
-      console.log("users",data); 
+      const users = await getUserList();
       this.setData({
-        users: data.data, 
+        users: users, 
         loading: false,
       });
     } catch (error) {

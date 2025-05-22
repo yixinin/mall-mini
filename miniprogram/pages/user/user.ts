@@ -1,6 +1,6 @@
 
-import { getUserInfo } from '../../remote/user';
-import{userLogin} from '../../utils/login';
+import { deleteUser, getCurrentUserInfo } from '../../service/user';
+import { userLogin } from '../../utils/login';
 
 Page({
   data: {
@@ -15,6 +15,7 @@ Page({
     manageGoods: false,
     managedUser: false,
     managedOrder: false,
+    showLogoutModal: false,
   },
 
   onLoad() {
@@ -26,8 +27,8 @@ Page({
     var manageGoods = false
     var manageUser = false
     var manageOrder = false
-    console.log("user: ",userinfo);
-    
+    console.log("user: ", userinfo);
+
     switch (userinfo.kind) {
       case 'admin':
         manageGoods = true;
@@ -51,12 +52,12 @@ Page({
     })
   },
 
-  async initUserInfo() { 
+  async initUserInfo() {
     const hasAgreed = wx.getStorageSync('hasAgreed');
-    if(hasAgreed){
-      const userInfo = await getUserInfo();
-      if(userInfo){
-        wx.setStorageSync('userInfo',userInfo);
+    if (hasAgreed) {
+      const userInfo = await getCurrentUserInfo();
+      if (userInfo) {
+        wx.setStorageSync('userInfo', userInfo);
         this.setData({
           userInfo: {
             ...userInfo,
@@ -168,24 +169,71 @@ Page({
       url: '/pages/user/privacy/privacy'
     });
   },
-  navigateToManageOrder(){
+  navigateToManageOrder() {
     wx.navigateTo({
       url: '/pages/order/order'
     })
   },
-  navigateToManageUser(){
+  navigateToManageUser() {
     wx.navigateTo({
       url: '/pages/manage/users/users'
     })
   },
-  navigateToManageGoods(){
+  navigateToManageGoods() {
     wx.navigateTo({
       url: '/pages/manage/goods/goods'
     })
   },
-  navigateToManageLessee(){
+  navigateToManageLessee() {
     wx.navigateTo({
       url: '/pages/manage/lessee/lessee'
     })
-  }
+  },
+  showLogoutConfirm() {
+    this.setData({
+      showLogoutModal: true
+    });
+  },
+
+  // 隐藏注销确认弹窗
+  hideLogoutModal() {
+    this.setData({
+      showLogoutModal: false
+    });
+  },
+
+  async logoutUser() {
+
+  },
+  // 确认注销账号
+  async confirmLogout() {
+    wx.showLoading({ title: '处理中...' });
+
+    try {
+      // 调用注销API
+      await deleteUser(this.data.userInfo.id);
+
+      // 清除本地用户数据
+      wx.removeStorageSync('userInfo');
+      wx.removeStorageSync('hasAgreed');
+
+      wx.reLaunch({
+        url: '/pages/goods-list/goods-list'
+      });
+
+      wx.showToast({
+        title: '账号已注销',
+        icon: 'success'
+      });
+    } catch (error) {
+      wx.showToast({
+        title: '注销失败，请联系管理员',
+        icon: 'none'
+      });
+      console.error('注销失败:', error);
+    } finally {
+      wx.hideLoading();
+      this.setData({ showLogoutModal: false });
+    }
+  },
 });

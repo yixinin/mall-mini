@@ -166,3 +166,28 @@ page {
   transform: scale(0.95);
   opacity: 0.9;
 }
+
+/* 下拉刷新样式 */
+.scroll-view-refresher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100rpx;
+}
+
+.refresher-loading {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 20rpx;
+  animation: rotate 1s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.refresher-text {
+  font-size: 28rpx;
+  color: #999;
+}

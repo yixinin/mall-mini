@@ -5,8 +5,13 @@
     <view class="user-info">
       <text class="user-name">{{userInfo.nickname || '点击登录'}}</text>
     </view>
-    <view class="user-status {{userInfo.nickname ? 'active' : ''}}">
-      {{userInfo.nickname ? '已认证' : '未登录'}}
+    <view class="loged-info">
+      <view class="user-status {{userInfo.nickname ? 'active' : ''}}">
+        {{userInfo.nickname ? '已认证' : '未登录'}}
+      </view>
+      <view wx:if="{{userInfo.nickname}}" class="logout-section">
+        <view class="logout-btn" bindtap="showLogoutConfirm">注销账号</view>
+      </view>
     </view>
   </view>
 
@@ -79,6 +84,23 @@
     </view>
   </view>
 
+  <!-- 注销确认弹窗 -->
+  <view class="modal" wx:if="{{showLogoutModal}}">
+    <view class="modal-mask" bindtap="hideLogoutModal"></view>
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">确认注销</text>
+      </view>
+      <view class="modal-body">
+        <text>确定要注销账号吗？此操作将删除所有用户信息且不可恢复！</text>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel" bindtap="hideLogoutModal">取消</button>
+        <button class="modal-btn confirm" bindtap="confirmLogout">确定注销</button>
+      </view>
+    </view>
+  </view>
+
   <!-- 现代化协议弹窗 -->
   <view class="agreement-modal" wx:if="{{showAgreementModal}}">
     <view class="modal-mask"></view>
@@ -86,7 +108,7 @@
       <view class="modal-header">
         <text class="modal-title">用户协议与隐私政策</text>
       </view>
-      <view class="card agreement-card"> 
+      <view class="card agreement-card">
         <view class="card-body">
           <view class="agreement-item">
             <radio class="agreement-radio" checked="{{agreements.user}}" bindtap="toggleAgreement" data-type="user" />

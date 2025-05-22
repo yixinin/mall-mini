@@ -1,3 +1,4 @@
+import { getCurrentUserInfo } from "../service/user";
 
 export const userLogin = () => {
   return new Promise((resolve, reject) => {
@@ -39,6 +40,7 @@ function login(resolve: any, reject: any) {
                 reject("login failed");
               },
               fail(res) {
+                console.log('登录失败', res);
                 reject("login failed");
               }
             })
@@ -49,28 +51,11 @@ function login(resolve: any, reject: any) {
   });
   return false
 }
-function getUserInfoByToken(token: string,resolve: any, reject: any) {
-  wx.request({
-    url: 'https://mini.iakl.top/api/v1/mini/user/info',
-    method: 'GET',
-    header: {
-      "Authorization": token
-    },
-    data: {},
-    success(res) {
-      console.log(res);
-      if (res.statusCode == 200) {
-        var ack = res.data as Ack<UserInfo>;
-        if (ack.data) {
-          wx.setStorageSync('userInfo', ack.data);
-          wx.setStorageSync('token', token);
-          resolve(token);
-          return
-        }
-      }
-      login(resolve, reject);
-    }, fail(res) {
-      login(resolve, reject);
-    }
+function getUserInfoByToken(token: string, resolve: any, reject: any) {
+  getCurrentUserInfo().then((user) => {
+    resolve(token);
+  }).catch((err) => {
+    console.log("user token expires, relogin", err);
+    login(resolve, reject);
   });
 }

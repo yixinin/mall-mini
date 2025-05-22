@@ -7,3 +7,7 @@ type Image = {
   id: number,
   path: string,
 }
+type PreInfo = {
+  id: number,
+  up: string,
+}

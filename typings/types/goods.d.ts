@@ -9,6 +9,7 @@ type GoodsItem = {
   final_price: number; // 折后价 (计算属性)
   sold: number, // 已售数量
   discount: number,
+  update_time: string,
 }
 
 type CartGoodsItem = {

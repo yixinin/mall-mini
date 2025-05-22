@@ -33,7 +33,7 @@
 
         <!-- 订单底部 -->
         <view class="order-footer">
-          <text class="total-price">共{{item.goods.length}}件 合计: {{item.total_price}}</text>
+          <text class="total-price">共{{item.goods.length}}件 合计: ￥{{item.total_price}}</text>
           <text class="order-time">创建于{{item.create_time}}</text>
         </view>
       </view>

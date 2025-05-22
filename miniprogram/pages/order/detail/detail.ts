@@ -1,6 +1,6 @@
 import { formatDate } from '../../../utils/util';
-import { updateOrder } from '../../../remote/order';
 import { getMinDate } from '../../../utils/time';
+import { getOrder, updateOrder } from '../../../service/order';
 // 定义类型
 type OrderStatus = 'watting' | 'confirmed' | 'completed' | 'cancelled';
 
@@ -135,7 +135,7 @@ Page({
     wx.showLoading({ title: '加载中...' });
 
     try {
-      const orderData = await this.fetchOrderDetail(this.data.orderId);
+      const orderData = await getOrder(this.data.orderId);
       orderData.create_time = formatDate(new Date(orderData.create_time))
       orderData.update_time = formatDate(new Date(orderData.update_time))
       this.setData({
@@ -166,32 +166,6 @@ Page({
     return `${hours}:${minutes}`;
   },
 
-  fetchOrderDetail(orderId: number): Promise<Order> {
-    const lessee = wx.getStorageSync('lessee') || 0;
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        wx.request({
-          url: 'https://mini.iakl.top/api/v1/mini/order/' + orderId.toString(),
-          method: 'GET',
-          header: {
-            'Authorization': wx.getStorageSync('token'),
-            'lessee': lessee,
-          },
-          success: ((res) => {
-            if (res.statusCode == 200) {
-              const ack = res.data as Ack<Order>;
-              console.log(ack);
-
-              if (ack.code == 0) {
-                resolve(ack.data)
-              }
-            }
-          })
-        });
-      }, 500);
-    });
-  },
-
   // 显示修改时间模态框
   showEditTimeModal() {
     this.setData({ showTimeModal: true });
@@ -204,7 +178,7 @@ Page({
 
   // 日期选择变化
   onDateChange(e: WechatMiniprogram.PickerChange) {
-    const dateStr = e.detail.value;
+    const dateStr: string = e.detail.value.toString();
     this.setData({
       selectedDate: dateStr
     });

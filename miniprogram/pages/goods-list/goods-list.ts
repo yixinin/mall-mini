@@ -1,3 +1,5 @@
+import { getGoodsList } from '../../service/goods';
+
 type SortType = 'default' | 'sales' | 'price' | 'price';
 type PriceOrder = 'asc' | 'desc'; // 新增价格排序方向
 Page({
@@ -7,10 +9,10 @@ Page({
     sortType: 'default' as SortType, // 当前排序方式
     priceOrder: 'desc' as PriceOrder, // 新增价格排序方向状态
     isLoading: false, // 是否正在加载
-    lessee: 0
+    lessee: 0,
   },
 
-  onLoad( ) {  
+  onLoad() {
     wx.getStorage({
       key: 'lessee',
       success: (res) => {
@@ -22,45 +24,41 @@ Page({
       }
     })
   },
+  async onRefresh() {
+    this.setData({ refreshing: true });
+
+    try {
+      await this.loadGoodsList(this.data.lessee);
+      wx.showToast({
+        title: '刷新成功',
+        icon: 'success'
+      });
+    } catch (error) {
+      wx.showToast({
+        title: '刷新失败',
+        icon: 'none'
+      });
+      console.error('刷新商品列表失败:', error);
+    } finally {
+      this.setData({ refreshing: false });
+    }
+  },
+
 
   loadGoodsList(lessee: number) {
     this.setData({ isLoading: true, lessee: lessee });
-    const token = wx.getStorageSync('token') || '';
-    if (lessee == 0) {
-      wx.showToast({ title: '加载租户失败, 请稍后再试。', icon: 'none' });
-      return
-    }
-    wx.request({
-      url: 'https://mini.iakl.top/api/v1/mini/goods?status=active',
-      method: 'GET',
-      data: {},
-      header: {
-        "Authorization": token,
-        "lessee": lessee,
-      },
-      success: (res) => {
-        if (res.statusCode != 200) {
-          console.error('获取商品列表失败');
-          wx.showToast({ title: '加载失败, 请稍后再试。', icon: 'none' });
-          this.setData({ loading: false });
-          return
-        }
-        console.log("get goods:", res.data);
-        const ack = res.data as Ack<GoodsItem[]>;
-        const goodsList = ack.data;
-        goodsList.map((v, i, _) => {
-          goodsList[i].discount = Math.floor((v.final_price / v.price) * 100) / 10;
-        })
-        this.setData({
-          goodsList: goodsList,
-          isLoading: false,
-        });
-      },
-      fail: (err) => {
-        console.error('获取商品列表失败', err);
-        wx.showToast({ title: '加载失败, 请稍后再试。', icon: 'none' });
-        this.setData({ loading: false });
-      }
+    getGoodsList().then((goodsList) => {
+      goodsList.map((v, i, _) => {
+        goodsList[i].discount = Math.floor((v.final_price / v.price) * 100) / 10;
+      })
+      this.setData({
+        goodsList: goodsList,
+        isLoading: false,
+      });
+    }).catch((err) => {
+      console.error('获取商品列表失败', err);
+      wx.showToast({ title: '加载失败, 请稍后再试。', icon: 'none' });
+      this.setData({ loading: false });
     });
   },
 

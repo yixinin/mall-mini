@@ -1,4 +1,5 @@
 
+import { getOrderList } from "../../service/order";
 import { formatDate } from "../../utils/util";
 Page({
   data: {
@@ -8,13 +9,13 @@ Page({
     page: 1,
     size: 10,
     hasMore: true,
-    status: '',
+    status: 'watting',
     statusOptions: [
-      { value: '', label: '全部' },
       { value: 'watting', label: '待处理' },
       { value: 'confirmed', label: '待上门' },
       { value: 'done', label: '已完成' },
-      { value: 'cancelled', label: '已取消' }
+      { value: 'cancelled', label: '已取消' },
+      { value: '', label: '全部' },
     ]
   },
 
@@ -29,47 +30,33 @@ Page({
   },
 
   loadOrders(mode: string, lessee: number) {
-    if (this.data.loading || !this.data.hasMore) return
+    if (this.data.loading) return
     this.setData({ loading: true })
     const status = this.data.status;
-    var url = 'https://mini.iakl.top/api/v1/mini/order'
+    var url = 'https://mini.iakl.top/api/v1/mini/order?status=' + status;
     if (mode == 'manage') {
-      url = url + '?manage=true&lessee_id=' + lessee.toString();
+      url = url + '&manage=true&lessee_id=' + lessee.toString();
     }
-    wx.request({
-      url: url,
-      method: 'GET',
-      header: {
-        'Authorization': wx.getStorageSync('token'),
-        'lessee': wx.getStorageSync('lessee')
-      },
-      data: {},
-      success: (res) => {
-        console.log(res.data);
-        const ack = res.data as Ack<Order[]>;
-        if (ack.code === 0) {
-          var datas = [] as Order[];
-          if (ack.data) {
-            ack.data.map((v, _) => {
-              if (!(status) || v.status === status) {
-                v.create_time = formatDate(new Date(Date.parse(v.create_time)))
-                datas.push(v);
-              }
-            })
-            this.setData({
-              orders: datas,
-              loading: false
-            })
-          }
+    getOrderList().then((orders) => {
+      var datas = [] as Order[];
+      orders.map((v, _) => {
+        if (!(status) || v.status === status) {
+          v.create_time = formatDate(new Date(Date.parse(v.create_time)))
+          datas.push(v);
         }
-      },
-      fail: (err) => {
-        console.error('获取订单失败', err)
-        wx.showToast({ title: '加载失败', icon: 'none' })
-        this.setData({ loading: false })
-      }
+      })
+      this.setData({
+        orders: datas,
+        loading: false
+      })
+    }).catch((err) => {
+      console.error('获取订单失败', err)
+      wx.showToast({ title: '加载失败', icon: 'none' })
+    }).finally(() => {
+      this.setData({ loading: false })
     })
   },
+  
   // 切换订单状态筛选
   changeStatus(e: any) {
     const status = e.currentTarget.dataset.status

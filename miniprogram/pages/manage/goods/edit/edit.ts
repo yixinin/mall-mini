@@ -1,4 +1,4 @@
-import { addGoods, updateGoods } from '../../../../remote/goods'
+import { addGoods, getGoods, updateGoods } from '../../../../service/goods';
 Page({
   data: {
     domain: 'https://mini.iakl.top',
@@ -36,7 +36,7 @@ Page({
   async loadGoodsDetail(goodsId: number) {
     wx.showLoading({ title: '加载中...' });
     try {
-      const goods = await this.fetchGoodsDetail(goodsId);
+      const goods = await getGoods(goodsId);
       this.setData({
         formData: {
           ...goods,
@@ -48,29 +48,6 @@ Page({
     } finally {
       wx.hideLoading();
     }
-  },
-
-  // 模拟获取商品详情API
-  fetchGoodsDetail(goodsId: number): Promise<GoodsItem> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        wx.request({
-          url: 'https://mini.iakl.top/api/v1/mini/goods/' + goodsId.toString(),
-          method: 'GET',
-          header: {
-            'Authorization': wx.getStorageSync('token'),
-            'lessee': wx.getStorageSync('lessee')
-          },
-          data: {},
-          success: (res) => {
-            const ack = res.data as Ack<GoodsItem>;
-            console.log(ack);
-            resolve(ack.data);
-          }
-        })
-
-      }, 500);
-    });
   },
 
   // 选择图片
@@ -87,32 +64,25 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: (res) => {
-        console.log(res);
-        wx.compressImage({
-          src: res.tempFilePaths[0],
-          quality: 30,
-          success(res) {
-            wx.uploadFile({
-              url: uploadURL,
-              filePath: res.tempFilePath,
-              name: 'avatar',
-              success: (res) => {
-                console.log(res);
-                if (res.statusCode == 200) {
-                  const ack: Ack<Image> = JSON.parse(res.data);
-                  out.setData({
-                    goodsId: ack.data.id,
-                    'formData.avatar': ack.data.path,
-                  });
-                  if (!updated) {
-                    wx.setStorageSync('add/goods/id', ack.data.id);
-                    wx.setStorageSync('add/goods/avatar', ack.data.path);
-                  }
-                }
+        wx.uploadFile({
+          url: uploadURL,
+          filePath: res.tempFilePaths[0],
+          name: 'avatar',
+          success: (res) => {
+            console.log(res);
+            if (res.statusCode == 200) {
+              const ack: Ack<Image> = JSON.parse(res.data);
+              out.setData({
+                goodsId: ack.data.id,
+                'formData.avatar': ack.data.path,
+              });
+              if (!updated) {
+                wx.setStorageSync('add/goods/id', ack.data.id);
+                wx.setStorageSync('add/goods/avatar', ack.data.path);
               }
-            });
+            }
           }
-        })
+        });
 
       }
     });
@@ -220,7 +190,7 @@ Page({
   },
 
   // 模拟创建商品API
-  async createGoods(data: GoodsItem) {
+  async createGoods(data: AddGoods) {
     if (this.data.goodsId == 0) {
       wx.showToast({
         title: "请先上传商品主图",
@@ -250,7 +220,7 @@ Page({
     }
   },
 
-  async updateGoods(goodsId: number, data: GoodsItem) {
+  async updateGoods(goodsId: number, data: AddGoods) {
     const update = {
       name: data.name,
       status: data.status,

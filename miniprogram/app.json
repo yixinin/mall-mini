@@ -13,8 +13,7 @@
     "pages/order/detail/detail",
     "pages/manage/users/users",
     "pages/manage/goods/goods",
-    "pages/manage/goods/edit/edit",
-    "pages/manage/lessee/lessee"
+    "pages/manage/goods/edit/edit"
   ],
   "tabBar": {
     "list": [

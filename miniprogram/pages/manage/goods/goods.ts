@@ -1,3 +1,5 @@
+import { getMangedGoodsList } from "../../../service/goods";
+
 Page({
   data: {
     goodsList: [] as GoodsItem[],
@@ -22,7 +24,7 @@ Page({
   async loadGoodsList() {
     wx.showLoading({ title: '加载中...' });
     try {
-      const goodsList = await this.fetchGoodsList();
+      const goodsList = await getMangedGoodsList();
       this.setData({
         goodsList,
         filteredGoods: goodsList
@@ -34,31 +36,6 @@ Page({
       wx.hideLoading();
     }
   },
-
-  fetchGoodsList(): Promise<GoodsItem[]> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        wx.request({
-          url: 'https://mini.iakl.top/api/v1/mini/goods/manage',
-          method: 'GET',
-          header: {
-            'Authorization': wx.getStorageSync('token'),
-            'lessee': wx.getStorageSync('lessee')
-          },
-          data: {},
-          success: (res) =>{
-            console.log(res);
-            
-            const ack = res.data as Ack<GoodsItem[]>;
-            resolve( ack.data);
-          },fail: (res) =>{
-            console.log("get goods list error",res);
-          }
-        })
-      }, 800);
-    });
-  },
-
   // 搜索输入处理
   onSearchInput(e: WechatMiniprogram.Input) {
     const keyword = e.detail.value.trim();

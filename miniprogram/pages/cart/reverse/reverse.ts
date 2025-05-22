@@ -1,3 +1,4 @@
+import { addOrder } from '../../../service/order';
 import {getMinDate} from '../../../utils/time';
 Page({
   data: {
@@ -137,46 +138,24 @@ Page({
     const token =  wx.getStorageSync('token') || '';
     if (!token){
       wx.showToast({ title: '请先登录', icon: 'none' });
+      wx.navigateBack();
       return 
     }
-    const lessee = wx.getStorageSync('lessee') || 0;
     const cartKey = this.data.lessee.toString() + '/cart';
-    wx.request({
-      url: 'https://mini.iakl.top/api/v1/mini/order',
-      method: 'POST',
-      data: order,
-      header:{
-        "Authorization": token,
-        "lessee": lessee,
-        "content-type": 'application/json'
-      },
-      success: (res) => { 
-        console.log(res); 
-        if (res.statusCode!= 200){
-          console.error('网络错误', res.statusCode);
-          wx.showToast({ title: '网络错误，请稍后再试。', icon: 'none' });
-          this.setData({ loading: false });
+
+    addOrder(order).then((id)=>{
+      wx.removeStorageSync(cartKey);
+      wx.showToast({ 
+        title: '预约成功，师傅稍后会联系您，请注意接听电话。您可在 我的->我的预约 查看当前已预约服务。', 
+        success: () => {
+          setTimeout(() => wx.navigateBack(), 1500);
         }
-        const ack = res.data as Ack<Order>;
-        if (ack.code!=0){ 
-          console.error('预约失败: ', ack.msg);
-          wx.showToast({ title: '预约失败', icon: 'none' });
-          this.setData({ loading: false });
-        }else{
-          wx.removeStorageSync(cartKey);
-          wx.showToast({ 
-            title: '预约成功，师傅稍后会联系您，请注意接听电话。您可在 我的->我的预约 查看当前已预约服务。', 
-            success: () => {
-              setTimeout(() => wx.navigateBack(), 1500);
-            }
-          });
-        } 
-      },
-      fail: (err) => {
-        console.error('网络错误', err);
-        wx.showToast({ title: '网络错误，请稍后再试。', icon: 'none' });
-        this.setData({ loading: false });
-      }
-    });
+      });
+    }).catch((err)=>{
+      console.error('请求失败', err);
+      wx.showToast({ title: '网络错误，请稍后再试。', icon: 'none' });
+    }).finally(()=>{
+      this.setData({ loading: false });
+    })
   },
 });
